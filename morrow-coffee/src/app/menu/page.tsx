@@ -5,136 +5,25 @@ import Link from "next/link";
 import { useState } from "react";
 
 import Navbar from "@/src/components/Navbar";
-
-type Category = "All" | "Coffee" | "Non-Coffee" | "Pastries" | "Merch";
-
-type Product = {
-  name: string;
-  category: Exclude<Category, "All">;
-  image: string;
-  price?: string;
-};
-
-const categories: Category[] = [
-  "All",
-  "Coffee",
-  "Non-Coffee",
-  "Pastries",
-  "Merch",
-];
-
-const products: Product[] = [
-  {
-    name: "Morrow Latte",
-    category: "Coffee",
-    image: "/images/latte.jpg",
-    price: "150",
-  },
-  {
-    name: "Cappuccino",
-    category: "Coffee",
-    image: "/images/cappuccino.jpg",
-    price: "150",
-  },
-  {
-    name: "Spanish Latte",
-    category: "Coffee",
-    image: "/images/spanish-latte.jpg",
-    price: "160",
-  },
-  {
-    name: "Caramel Macchiato",
-    category: "Coffee",
-    image: "/images/caramel-macchiato.jpg",
-    price: "160",
-  },
-  {
-    name: "Caramel Macchiato",
-    category: "Coffee",
-    image: "/images/caramel-macchiato-2.jpg",
-    price: "160",
-  },
-  {
-    name: "Cold Brew",
-    category: "Coffee",
-    image: "/images/cold-brew.jpg",
-    price: "145",
-  },
-
-  {
-    name: "Matcha Bliss",
-    category: "Non-Coffee",
-    image: "/images/matcha.jpg",
-    price: "160",
-  },
-  {
-    name: "Chocolate",
-    category: "Non-Coffee",
-    image: "/images/chocolate.jpg",
-    price: "150",
-  },
-  {
-    name: "Strawberry Matcha",
-    category: "Non-Coffee",
-    image: "/images/strawberry-matcha.jpg",
-    price: "170",
-  },
-
-  {
-    name: "Croissant",
-    category: "Pastries",
-    image: "/images/croissant.jpg",
-    price: "120",
-  },
-  {
-    name: "Chocolate Croissant",
-    category: "Pastries",
-    image: "/images/chocolate-croissant.jpg",
-    price: "135",
-  },
-  {
-    name: "Cinnamon Roll",
-    category: "Pastries",
-    image: "/images/cinnamon-roll.jpg",
-    price: "130",
-  },
-  {
-    name: "Blueberry Muffin",
-    category: "Pastries",
-    image: "/images/blueberry-muffin.jpg",
-    price: "110",
-  },
-
-  {
-    name: "Morrow Tumbler",
-    category: "Merch",
-    image: "/images/morrow-tumbler.jpg",
-  },
-  {
-    name: "Coffee Beans",
-    category: "Merch",
-    image: "/images/coffee-beans.jpg",
-  },
-  {
-    name: "Ceramic Mug",
-    category: "Merch",
-    image: "/images/ceramic-mug.jpg",
-  },
-];
+import { categories, products, type Category } from "@/src/data/products";
 
 export default function MenuPage() {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [activeCategory, setActiveCategory] =
+    useState<Category>("All");
 
   const filteredProducts =
     activeCategory === "All"
       ? products
-      : products.filter((product) => product.category === activeCategory);
+      : products.filter(
+          (product) => product.category === activeCategory
+        );
 
   return (
     <main className="min-h-screen bg-[#F7EEDF] text-[#38251A]">
       <Navbar />
 
       <section className="mx-auto w-full max-w-[1500px] px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+
         <h1 className="font-playfair text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
           Our Menu
         </h1>
@@ -163,8 +52,8 @@ export default function MenuPage() {
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {filteredProducts.map((product) => (
             <Link
-              key={`${product.name}-${product.image}`}
-              href="/menu"
+              key={product.slug}
+              href={`/menu/${product.slug}`}
               className="group overflow-hidden rounded-md border border-[#B99F84] bg-[#FFFDF8] transition duration-200 hover:-translate-y-1 hover:shadow-md"
             >
               <div className="relative aspect-[1.45/1] overflow-hidden">
