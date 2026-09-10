@@ -6,6 +6,9 @@ import { useState } from "react";
 
 import Navbar from "@/src/components/Navbar";
 import { categories, products, type Category } from "@/src/data/products";
+import {
+  ShoppingBag,
+} from "lucide-react";
 
 export default function MenuPage() {
   const [activeCategory, setActiveCategory] =
@@ -92,6 +95,33 @@ export default function MenuPage() {
           </div>
         )}
       </section>
+
+      <footer className="mt-10 bg-[#38251A] px-6 py-8 text-[#FFFDF8]">
+
+        <div className="mx-auto flex max-w-[1500px] flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+
+          <div>
+            <h2 className="font-playfair text-xl font-semibold">
+              MORROW
+            </h2>
+
+            <p className="font-inter text-xs tracking-[0.25em]">
+              COFFEE
+            </p>
+          </div>
+
+          <p className="font-inter text-xs text-[#DCC3A5]">
+            Slow mornings. Better coffee.
+          </p>
+
+          <div className="font-inter flex items-center gap-2 text-xs text-[#DCC3A5]">
+            <ShoppingBag size={15} />
+            Order Online
+          </div>
+
+        </div>
+
+      </footer>
     </main>
   );
 }
